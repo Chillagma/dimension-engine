@@ -1123,9 +1123,9 @@ class Raycaster
             Raycaster.MINIMAP_SCALE,Raycaster.MINIMAP_SCALE
           );
           ctx.fillRect(       // ... then draw a block on the minimap
-            x * Raycaster.MINIMAP_SCALE +500,
-            y * Raycaster.MINIMAP_SCALE+500,
-            Raycaster.MINIMAP_SCALE,Raycaster.MINIMAP_SCALE+500
+            x * Raycaster.MINIMAP_SCALE +200,
+            y * Raycaster.MINIMAP_SCALE+200,
+            Raycaster.MINIMAP_SCALE,Raycaster.MINIMAP_SCALE+200
           );
         }
       }
