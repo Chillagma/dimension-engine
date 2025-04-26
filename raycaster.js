@@ -18,7 +18,9 @@ const KEY_D = 68
 
 const KEY_Q = 81
 const KEY_E = 69
-
+const KEY_SPACE=32
+let step =255
+let shrink =155
 class Sprite
 {
   constructor(x=0, y=0, z=0, w=128, h=128)
@@ -90,53 +92,82 @@ class Raycaster
   static get MINIMAP_SCALE() {
     return 8
   }
-
+  initPlayer()
+  {
+    this.player =  {
+      x : 16 * this.tileSize, // current x, y position in game units
+      y : 10 * this.tileSize,
+      z : 0,
+      dir : 0,   // turn direction,  -1 for left or 1 for right.
+      rot : 0,   // rotation angle; counterclockwise is positive.
+      speed : 0, // forward (speed = 1) or backwards (speed = -1).
+      moveSpeed : Math.round(this.tileSize/(DESIRED_FPS/60.0*16))*1.5,
+      rotSpeed : 1.5 * Math.PI / 270
+    }
+  }
   initMap()
   {
     this.map = [
-      [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
+      [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
       [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
       [3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,3,0,3,0,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,3],
-      [3,0,0,3,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,0,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,0,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,3,3,3,3,3,3],
-      [3,0,0,3,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,3,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,3,0,3,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3],
-      [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,0,0,0,0,0,0,3,3,3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,0,0,0,0,0,0,3,3,3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,0,0,0,0,0,0,3,3,3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,3,3,3,3,3,3],
-      [3,0,0,0,0,0,0,0,0,3,3,3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,4,0,0,4,3,0,3,3,3,3,3,3,3,3,0,3,4,4,0,0,4,0,0,0,0,0,0,0,3],
-      [3,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,3],
-      [3,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,3],
-      [3,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,3],
-      [3,0,0,4,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3,4,0,0,0,0,0,0,0,3],
-      [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
-      [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+      [4,0,0,4,0,4,0,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,0,0,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,0,0,4,0,0,0,0,0,0,4,0,0,0,0,0,3,3,0,4,0,0,0,0,4,4,4,4,4,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,4,0,0,0,0,0,3,3,0,4,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4],
+      [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,0,0,0,0,0,0,4,4,4,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4],
+      [4,0,0,0,0,0,0,0,0,4,4,4,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,0,0,0,0,0,0,4,4,4,0,0,4,4,4,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4],
+      [4,0,0,0,0,0,0,0,0,4,4,4,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,0,4,4,0,4,4,4,4,4,4,4,4,0,4,4,4,0,0,4,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0,4],
+      [4,0,0,4,3,3,4,3,3,3,3,3,3,3,3,3,3,3,3,3,4,3,3,4,0,0,0,0,0,0,0,4],
+      [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4]
     ];
   }
 
   loadImages()
   {
+    
     console.log("loadImages()")
     this.textureImageDatas = []
     this.texturesLoadedCount = 0
     this.texturesLoaded = false
 
     this.imageconf = [
-      {"id" : "floorImageData","src" : "img/zombie.png"},
-      {"id" : "ceilingImageData", "src" : "img/zombie.png"},
+      {"id" : "floorImageData","src" : "img/grass.png"},
+      {"id" : "ceilingImageData", "src" : "img/water.png"},
       {"id" : "spriteImageData", "src" : "img/zombie.png"},
       {"id" : "wallsImageData", "src" : "img/wallsheet.png"}
+      
     ];
-
+this.imageconf2 =[
+  {"id" : "spriteImageData", "core" : "img/zombie.png"},
+]
     let div_textures = document.getElementById("div_textures")
     let this2 = this
+    const space_down= this.keysDown[KEY_SPACE] || this.keysDown[KEY_SPACE]
+    //this.mainCanvasContext.putImageData(this.backBuffer, 0, 0);
+    let step=255
+    if(space_down){
+     step--;
+        
+      
+     
+    }
+    else{
+      step=255;
+    }
+    
     for (let imageconf of this.imageconf) {
       let src = imageconf.src;
       let img = document.createElement("img")
@@ -156,25 +187,15 @@ class Raycaster
 
         this2.texturesLoadedCount++
         this2.texturesLoaded = this2.texturesLoadedCount == this2.imageconf.length
+        
       };
       div_textures.appendChild(img)
       img.src = src
     }
+    
   }
 
-  initPlayer()
-  {
-    this.player =  {
-      x : 16 * this.tileSize, // current x, y position in game units
-      y : 10 * this.tileSize,
-      z : 0,
-      dir : 0,   // turn direction,  -1 for left or 1 for right.
-      rot : 0,   // rotation angle; counterclockwise is positive.
-      speed : 0, // forward (speed = 1) or backwards (speed = -1).
-      moveSpeed : Math.round(this.tileSize/(DESIRED_FPS/60.0*16))*1.5,
-      rotSpeed : 1.5 * Math.PI / 270
-    }
-  }
+
 
   initSprites()
   {
@@ -271,6 +292,14 @@ class Raycaster
     imageData.data[index+1] = g;
     imageData.data[index+2] = b;
     imageData.data[index+3] = a;
+  }
+
+  static setPixel_zombie(imageData, x, y, r, g, b, a)
+  {
+    let index = (x + y * imageData.width) * 4;
+    
+    imageData.data[index+2] = b;
+
   }
 
   static getPixel(imageData, x, y)
@@ -405,10 +434,16 @@ class Raycaster
 
         let srcPixel = Raycaster.getPixel(imgdata, textureX, textureY);
         if (srcPixel.a) {
-          Raycaster.setPixel(this.backBuffer, screenX-screenY, screenY, srcPixel.r, srcPixel.g, srcPixel.b, 255);
-          Raycaster.setPixel(this.backBuffer, screenX+200, screenY-screenX, srcPixel.r, srcPixel.g, srcPixel.b, 255);
-          Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX+200, srcPixel.r, srcPixel.g, srcPixel.b, 255);
+          Raycaster.setPixel(this.backBuffer, screenX-screenY, screenY,255, 255, srcPixel.b, 255);
+          Raycaster.setPixel(this.backBuffer, screenX-25, screenY-screenX, srcPixel.r, srcPixel.g, 255, 255)+Math.sin(Raycaster.setPixel(this.backBuffer, screenX-25, screenY, srcPixel.r, srcPixel.g, 255, 255)*5);
+          Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX+200, 255, srcPixel.g, srcPixel.b, 255);
+          Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX-25, 255, srcPixel.g, 255, 255)-Math.cos(Raycaster.setPixel(this.backBuffer, screenX-screenY-25, screenY-25, 255, srcPixel.g, 255, 255)*5);
 
+          Raycaster.setPixel(this.spriteImageData,50,50,255,255,255,255);
+          //screen.fillRect(24,24,500,500);
+         // Raycaster.setPixel(this.backBuffer, screenX+this.player.x, screenY+this.player.y, 255, srcPixel.g, 255, 255);
+          ///these are cameras
+         
           //keep doing this...
         }
       }
@@ -427,6 +462,7 @@ class Raycaster
    */
   drawSpriteStrip(rayHit)
   {
+    
     let sprite = rayHit.sprite
     if (!rayHit.sprite.screenPosition) {
       rayHit.sprite.screenPosition = this.spriteScreenPosition(rayHit.sprite)
@@ -447,6 +483,7 @@ class Raycaster
     if (srcX >= 0 && srcX <this.textureSize) {
       this.drawTexturedRect(this.spriteImageData, srcX, 0, srcW, this.textureSize, dstX, rc.y, this.stripWidth, rc.h);
     }
+    
   }
 
   drawWallStrip(rayHit, textureX, textureY, wallScreenHeight)
@@ -457,9 +494,12 @@ class Raycaster
     let imgy = (this.displayHeight - wallScreenHeight)/2;
     let imgw = this.stripWidth;
     let imgh = wallScreenHeight;
+    
     this.drawTexturedRect(this.wallsImageData,textureX,textureY,swidth,sheight,imgx,imgy,imgw,imgh);
     for (let level=1; level<this.ceilingHeight; ++level) {
-      this.drawTexturedRect(this.spriteImageData,textureX,textureY,swidth,sheight,imgx,imgy-level*wallScreenHeight,imgw,imgh);
+      this.drawTexturedRect(this.spriteImageData,textureX,textureY,swidth,sheight,imgx,imgy-level*wallScreenHeight+500,imgw,imgh+400);
+      
+      //Raycaster.setPixel(this.backBuffer, x, y, 55 , 180, 55, 255)
     }
   }
 
@@ -467,9 +507,11 @@ class Raycaster
   {
     for (let y=this.displayHeight/2; y<this.displayHeight; ++y) {
       for (let x=0; x<this.displayWidth; ++x) {
-        Raycaster.setPixel(this.backBuffer, x, y, 55, 180, 55, 255);
+        Raycaster.setPixel(this.backBuffer, x, y, 55 , 180, 55, 255);
       }
     }
+  
+   
   }
 
   drawSolidCeiling()
@@ -479,6 +521,7 @@ class Raycaster
         Raycaster.setPixel(this.backBuffer, x, y, 64, 145, 250, 255);
       }
     }
+    
   }
 
   /*
@@ -638,7 +681,25 @@ class Raycaster
         this.drawWallStrip(rayHit, textureX, textureY, wallScreenHeight);
       }
     }
+    const z_up = this.keysDown[KEY_Q] || this.keysDown[KEY_Q]
+    const z_down= this.keysDown[KEY_W] || this.keysDown[KEY_W]
+    const space_down= this.keysDown[KEY_SPACE] || this.keysDown[KEY_SPACE]
     this.mainCanvasContext.putImageData(this.backBuffer, 0, 0);
+    
+    if(space_down){
+     step=step-5;
+     shrink =shrink-15
+
+        this.mainCanvasContext.putImageData(this.spriteImageData, step+70, step-30,0,0,shrink,shrink);
+        
+      
+     
+    }
+    else{
+      step=255;
+      shrink=155;
+    }
+   ///zombie data
 
   }
 
@@ -921,7 +982,7 @@ class Raycaster
     let x = Math.tan(spriteAngle) * this.viewDist;
 
     let spriteDistance = Math.sqrt(dx*dx + dy*dy)
-    let centerDistance = Math.tan(spriteAngle)*spriteDistance;
+    let centerDistance = Math.cos(spriteAngle)*spriteDistance;
 
     // spriteScreenWidth   spriteWorldWidth
     // ----------------- = ----------------
@@ -960,7 +1021,7 @@ class Raycaster
     objectCtx.moveTo(playerX, playerY);
     objectCtx.lineTo(
       rayX,
-      rayY+rayY
+      rayY
    );
     objectCtx.closePath();
     objectCtx.stroke();
@@ -1057,10 +1118,10 @@ class Raycaster
 
     miniMapObjects.width = miniMapObjects.width;
 
-    let playerX = this.player.x / (this.mapWidth*this.tileSize) * 400;
+    let playerX = this.player.x / (this.mapWidth*this.tileSize) * 100;
     playerX = playerX/100 * Raycaster.MINIMAP_SCALE * this.mapWidth;
 
-    let playerY = this.player.y / (this.mapHeight*this.tileSize) * 400;
+    let playerY = this.player.y / (this.mapHeight*this.tileSize) * 100;
     playerY = playerY/100 * Raycaster.MINIMAP_SCALE * this.mapHeight;
 
     let PlayerZ =0;
@@ -1083,10 +1144,10 @@ class Raycaster
     PlayerZ=PlayerZ-1;
     objectCtx.strokeStyle = "red";
     objectCtx.beginPath();
-    objectCtx.moveTo(playerX , playerY);
+    objectCtx.moveTo(playerX-500 , playerY-500);
     objectCtx.lineTo(
-      (playerX +  Math.cos(this.player.rot) * 4 * Raycaster.MINIMAP_SCALE*400) ,
-      (playerY + -Math.sin(this.player.rot) * 4 * Raycaster.MINIMAP_SCALE*400)
+      (playerX +  Math.cos(this.player.rot) * 4 * Raycaster.MINIMAP_SCALE) ,
+      (playerY + -Math.sin(this.player.rot) * 4 * Raycaster.MINIMAP_SCALE)
     );
     objectCtx.closePath();
     objectCtx.stroke();
@@ -1109,7 +1170,7 @@ class Raycaster
 
     let ctx = miniMap.getContext("2d");
     ctx.fillStyle = "white";
-    ctx.fillRect(0,0,miniMap.width,miniMap.height);
+   // ctx.fillRect(0,0,miniMap.width,miniMap.height);
 
     // loop through all blocks on the map
     for (let y=0;y<this.mapHeight;y++) {
@@ -1122,11 +1183,11 @@ class Raycaster
             y * Raycaster.MINIMAP_SCALE,
             Raycaster.MINIMAP_SCALE,Raycaster.MINIMAP_SCALE
           );
-          ctx.fillRect(       // ... then draw a block on the minimap
-            x * Raycaster.MINIMAP_SCALE +500,
-            y * Raycaster.MINIMAP_SCALE+500,
-            Raycaster.MINIMAP_SCALE,Raycaster.MINIMAP_SCALE+500
-          );
+         /* ctx.fillRect(       // ... then draw a block on the minimap
+            x * Raycaster.MINIMAP_SCALE +200,
+            y * Raycaster.MINIMAP_SCALE+200,
+            Raycaster.MINIMAP_SCALE,Raycaster.MINIMAP_SCALE+300
+          );*/
         }
       }
     }
