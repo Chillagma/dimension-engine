@@ -24,8 +24,11 @@ let shrink =155
 let trigger_a=false;
 let trigger_b=false;
 let trigger_end=false
+<<<<<<< HEAD
 let swap =false;
 var some_x=true
+=======
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
 window.disp_h=true
 
 class Sprite
@@ -115,6 +118,7 @@ class Raycaster
   initMap()
   {
     this.map = [
+<<<<<<< HEAD
       [4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4],
       [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
       [4,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
@@ -126,6 +130,19 @@ class Raycaster
       [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,4],
       [4,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
       [4,0,0,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+=======
+      [4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],
+      [3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
+      [3,0,0,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3],
+      [4,0,0,4,4,4,4,0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,4,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,3,3,0,4,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+      [4,0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
       [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
       [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
       [4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
@@ -160,7 +177,11 @@ class Raycaster
 this.imageconf2 =[
   {"id" : "spriteImageData", "core" : "img/zombie.png"},
 ]
+<<<<<<< HEAD
     var div_textures = document.getElementById("div_textures")
+=======
+    let div_textures = document.getElementById("div_textures")
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
     let this2 = this
     const space_down= this.keysDown[KEY_SPACE] || this.keysDown[KEY_SPACE]
     //this.mainCanvasContext.putImageData(this.backBuffer, 0, 0);
@@ -182,6 +203,7 @@ this.imageconf2 =[
         console.log("img src loaded " + img.src)
 
         // Draw images on this temporary canvas to grab the ImageData pixels
+<<<<<<< HEAD
         var canvas = document.createElement('canvas');
         canvas.width = img.width;
         canvas.height = img.height;
@@ -192,6 +214,17 @@ this.imageconf2 =[
 
         // Assign ImageData to a variable with same name as imageconf.id
         this2[imageconf.id] = context.getImageData(0, 0, img.width/2, img.height/2)
+=======
+        let canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        let context = canvas.getContext('2d')
+        context.drawImage(img, 0, 0, img.width, img.height)
+        console.log(imageconf.id + " size = (" + img.width + ", " + img.height + ")")
+
+        // Assign ImageData to a variable with same name as imageconf.id
+        this2[imageconf.id] = context.getImageData(0, 0, img.width, img.height)
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
 
         this2.texturesLoadedCount++
         this2.texturesLoaded = this2.texturesLoadedCount == this2.imageconf.length
@@ -418,11 +451,16 @@ this.imageconf2 =[
     let screenStartY = dstY
     let texStartX = srcX
     let texStartY = srcY
+<<<<<<< HEAD
   
+=======
+    let some_x=true
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
     let some_y=true;
     
     const texStepX = srcW / dx
     const texStepY = srcH / dy
+<<<<<<< HEAD
     /*if (screenStartY > 900) {
       //here is distance
       texStartY = srcY + (0-screenStartY) * texStepY
@@ -441,11 +479,21 @@ this.imageconf2 =[
        
        
        
+=======
+
+    // Skip top pixels off screen
+    if (screenStartY < 0) {
+      //here is distance
+      texStartY = srcY + (0-screenStartY) * texStepY
+      screenStartY = 0
+       some_x=true
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
     }
     else{
       some_x=false;
     }
 
+<<<<<<< HEAD
 
 
 
@@ -472,6 +520,20 @@ this.imageconf2 =[
    
    
    
+=======
+    // Skip left pixels off screen
+    if (screenStartX < 0) {
+      
+      //here is distance...
+      texStartX = srcX + (0-screenStartX) * texStepX
+      screenStartX = 0
+      some_y=true;
+    }
+    else{
+      some_y=false;
+    }
+   
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
     for (let texY=texStartY, screenY=screenStartY; screenY<dstEndY && screenY<this.displayHeight; screenY++, texY+=texStepY) {
       for(let texX=texStartX, screenX=screenStartX; screenX<dstEndX && screenX<this.displayWidth; screenX++, texX+=texStepX) {
         let textureX = Math.trunc(texX)
@@ -483,14 +545,21 @@ this.imageconf2 =[
        
         
         let srcPixel = Raycaster.getPixel(imgdata, textureX, textureY);
+<<<<<<< HEAD
        
+=======
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
         
         if (srcPixel.a) {
           const space_down= this.keysDown[KEY_SPACE] || this.keysDown[KEY_SPACE]
           const q_down= this.keysDown[KEY_Q] || this.keysDown[KEY_Q]
           
         
+<<<<<<< HEAD
            if(space_down){
+=======
+           if(space_down&&some_x==true&&this.displayHeight<=1050){
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
              
           
               
@@ -498,6 +567,7 @@ this.imageconf2 =[
                trigger_a=true;
               document.getElementById('missionLabel').textContent = "Mission 2 Reset your viewpoint!";
               if(trigger_end==true){
+<<<<<<< HEAD
                 document.getElementById('missionLabel').textContent = "shoot at co-ordinate 20000, 15000 . Your current co-ordinates are: x-coordinate "+this.player.x+" y-coordinate is "+this.player.y;
               }
      
@@ -510,6 +580,20 @@ this.imageconf2 =[
                 //Raycaster.setPixel(this.backBuffer, screenX-25, screenY-screenX, 255, 255, srcPixel.b, 255)+Math.sin(Raycaster.setPixel(this.backBuffer, screenX-25, screenY, 255, 255, srcPixel.b, 255)*5);
                // Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX+200, 255, 255, srcPixel.b, 255);
                // Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX-25, 255, 255, srcPixel.b, 255)-Math.cos(Raycaster.setPixel(this.backBuffer, screenX-screenY-25, screenY-25,  255, 255, srcPixel.b, 255)*5);
+=======
+                document.getElementById('missionLabel').textContent = "Mission 3 to be continued";
+              }
+     
+              
+              var delayInMilliseconds = 1000; // 1 second
+             
+            
+                this.displayHeight=1049;
+                Raycaster.setPixel(this.backBuffer, screenX-screenY, screenY,255, 255, srcPixel.b, 255);
+                Raycaster.setPixel(this.backBuffer, screenX-25, screenY-screenX, 255, 255, srcPixel.b, 255)+Math.sin(Raycaster.setPixel(this.backBuffer, screenX-25, screenY, 255, 255, srcPixel.b, 255)*5);
+                Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX+200, 255, 255, srcPixel.b, 255);
+                Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX-25, 255, 255, srcPixel.b, 255)-Math.cos(Raycaster.setPixel(this.backBuffer, screenX-screenY-25, screenY-25,  255, 255, srcPixel.b, 255)*5);
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
                 
             
            }
@@ -517,6 +601,7 @@ this.imageconf2 =[
           
             
            }
+<<<<<<< HEAD
            
              if(q_down){
               this.displayHeight=400
@@ -549,6 +634,28 @@ this.imageconf2 =[
 
            }
          
+=======
+             if(q_down){
+              this.displayHeight=400
+              trigger_b=true
+              Raycaster.setPixel(this.backBuffer, screenX-screenY, screenY,255, 255, srcPixel.b, 255);
+              Raycaster.setPixel(this.backBuffer, screenX-25, screenY-screenX, 255, 255, srcPixel.b, 255)+Math.sin(Raycaster.setPixel(this.backBuffer, screenX-25, screenY, 255, 255, srcPixel.b, 255)*5);
+              Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX+200, 255, 255, srcPixel.b, 255);
+              Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX-25, 255, 255, srcPixel.b, 255)-Math.cos(Raycaster.setPixel(this.backBuffer, screenX-screenY-25, screenY-25,  255, 255, srcPixel.b, 255)*5);
+              
+           }
+          
+           else {
+            Raycaster.setPixel(this.backBuffer, screenX-25, screenY-screenX, srcPixel.r, srcPixel.g, 255, 255)+Math.sin(Raycaster.setPixel(this.backBuffer, screenX-25, screenY, srcPixel.r, srcPixel.g, 255, 255)*5);
+            Raycaster.setPixel(this.backBuffer, screenX-screenY, screenY,255,srcPixel.g , 255, 255);
+            Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX+200, 255, srcPixel.g, srcPixel.b, 255)+Math.cos(Raycaster.setPixel(this.backBuffer, (screenY)*2-screenX+200, screenY-screenX+200, 255, srcPixel.g, srcPixel.b, 255))*100;
+            Raycaster.setPixel(this.backBuffer, screenX, screenY-screenX-25, 255, srcPixel.g, 255, 255)-Math.cos(Raycaster.setPixel(this.backBuffer, screenX-screenY-25, screenY-25, 255, srcPixel.g, 255, 255)*5);
+            //this.displayHeight=400
+            
+            
+           }
+
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
            if(space_down){
             this.displayHeight=this.displayHeight
             Raycaster.setPixel(this.backBuffer, screenX-screenY, screenY,255, 255, srcPixel.b, 255);
@@ -562,7 +669,11 @@ this.imageconf2 =[
             trigger_a=false
             trigger_b=false
             trigger_end=true;
+<<<<<<< HEAD
             document.getElementById('missionLabel').textContent = "shoot at co-ordinate 20000, 15000 . Your current co-ordinates are: x-coordinate "+this.player.x+" y-coordinate is "+this.player.y;
+=======
+            document.getElementById('missionLabel').textContent = "Mission 3 to be continued";
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
            }
          
           
@@ -1231,7 +1342,10 @@ this.imageconf2 =[
      // y = H * sin(angle)
 
      //roation is somwehre else??
+<<<<<<< HEAD
      
+=======
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
     let newX = this.player.x + Math.cos(this.player.rot) * moveStep
     let newY = this.player.y + -Math.sin(this.player.rot) * moveStep
     let newZ =this.player.y + this.player.lol
@@ -1249,11 +1363,18 @@ this.imageconf2 =[
     if (this.isBlocking(cellX, cellY)) { // are we allowed to move to the new position?
       return; // no, bail out.
     }
+<<<<<<< HEAD
    // console.log("x co-ord is "+this.player.x)
     //console.log ("y-coord is "+this .player.y)
     this.player.x = newX+10; // set new position
     this.player.y = newY+10;
     this.player.z = newZ+400;
+=======
+
+    this.player.x = newX+10; // set new position
+    this.player.y = newY+10;
+    this.player.z = newZ+200;
+>>>>>>> 139303283cb67a6b9dff3c8b74315003c5f8f472
   }
 
   isBlocking(x,y) {
