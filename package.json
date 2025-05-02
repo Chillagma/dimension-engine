@@ -1,0 +1,9 @@
+{
+  "name": "dimension-engine",
+  "version": "1.0.0",
+  "description": "Modified from this.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  }
+}

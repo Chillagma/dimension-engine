@@ -2,6 +2,13 @@
 JavaScript Canvas Wolfenstein 3D Raycaster
 Author: Andrew Lim
 https://github.com/andrew-lim/html5-raycast
+
+<<<<<<< HEAD
+re-adjusted and changed
+lets see
+=======
+re-adjusted
+>>>>>>> 651087c (try to see)
 -->
 <html>
 <head>
@@ -9,7 +16,7 @@ https://github.com/andrew-lim/html5-raycast
 <script src="raycaster.js"></script>
 <style>
 body {
-  background-color: rgb(25,65,65);
+  background-color: rgb(168, 232, 243);
   height: 100%; overflow: hidden;
   color: white;
 }
@@ -31,7 +38,8 @@ canvas#minimapobjects {
  position : absolute;
  background-color : none;
  /*
- hello
+ Let's try this
+ hello added another hello and another hello again
  Do not set canvas dimensions via CSS, use HTML attributes instead
  https://stackoverflow.com/a/27706093/1645045
  */
@@ -42,10 +50,12 @@ canvas#minimapobjects {
  margin-right:auto;
  /*width: 480px;
  height: 320px;*/
- border-top : 4px solid rgb(25,25,25);
- border-left: 4px solid rgb(25,25,25);
- border-right: 4px solid #1B625E;
- border-bottom: 4px solid #1B625E;
+
+
+ border-top : 4px solid rgb(215, 245, 202);
+ border-left: 4px solid rgb(182, 238, 240);
+ border-right: 4px solid #c0fffc;
+ border-bottom: 4px solid #caf8f6;
  overflow : hidden;
 }
 
@@ -62,34 +72,57 @@ canvas#minimapobjects {
   <div style="display: flex; flex-direction: row; justify-content: center; align-content: center;">
     <table cellspacing="10">
       <tr>
-        <td>Ceiling Height</td>
+        <td style="color: rgb(0, 0, 0);">Ceiling Height</td>
         <td>
           <select name="ceilingHeight" id="ceilingHeight" onchange="javascript:this.blur()">
             <option>1</option>
-            <option selected>2</option>
+            <option  >2</option>
             <option>3</option>
-            <option>4</option>
+            <option selected>4</option>
           </select>
         </td>
       </tr>
       <tr>
-        <td><label for="texturedCeilingOn">Textured Ceiling</label></td>
-        <td><input type="checkbox" id="texturedCeilingOn" checked="" /></td>
+        <td><label style="color: rgb(0, 0, 0);" for="texturedCeilingOn">Textured Ceiling</label></td>
+        <td><input style="color: rgb(0, 0, 0);" type="checkbox" id="texturedCeilingOn" checked="" /></td>
       </tr>
       <tr>
-        <td><label for="texturedFloorOn">Textured Floor</label></td>
-        <td><input type="checkbox" id="texturedFloorOn" checked="" /></td>
+        <td><label style="color: rgb(0, 0, 0);" for="texturedFloorOn">Textured Floor</label></td>
+        <td><input style="color: rgb(0, 0, 0);" type="checkbox" id="texturedFloorOn" checked="" /></td>
+        
+      </tr>
+      <tr>
+
+       
+        <td><label style="color: rgb(0, 0, 0);">USE WASD TO MOVE AND SPACE BAR TO SHOOT AND Q TO RESET</label></td>
+      </tr>
+      <tr>
+
+        <td><label  id="missionLabel" style="color: rgb(0, 171, 238);">Mission 1:SHOOT the WALLS</label></td>
+       
       </tr>
     </table>
     <div id="minimapcontainer">
       <canvas id="minimap"></canvas>
       <canvas id="minimapobjects"></canvas>
+      
     </div>
   </div>
+ 
   <script type="text/javascript">
     window.onload = function() {
       let raycaster = new Raycaster(document.getElementById("mainCanvas"))
       raycaster.gameCycle()
+      
     }
   </script>
+   <script src="raycaster.js"></script>
+   <script>
+     
+     if (window.disp_h == false){
+       
+       document.getElementById("missionLabel").textContent = "hello";
+     }
+   
+   </script>
 </body>
