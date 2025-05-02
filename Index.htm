@@ -82,17 +82,40 @@ canvas#minimapobjects {
       <tr>
         <td><label for="texturedFloorOn">Textured Floor</label></td>
         <td><input type="checkbox" id="texturedFloorOn" checked="" /></td>
+        
+      </tr>
+      <tr>
+
+       
+        <td><label style="color: rgb(238, 243, 245);">USE WASD TO MOVE AND SPACE BAR TO SHOOT AND Q TO RESET</label></td>
+      </tr>
+      <tr>
+
+        <td><label  id="missionLabel" style="color: rgb(0, 171, 238);">Mission 1:SHOOT the WALLS</label></td>
+       
       </tr>
     </table>
     <div id="minimapcontainer">
       <canvas id="minimap"></canvas>
       <canvas id="minimapobjects"></canvas>
+      
     </div>
   </div>
+ 
   <script type="text/javascript">
     window.onload = function() {
       let raycaster = new Raycaster(document.getElementById("mainCanvas"))
       raycaster.gameCycle()
+      
     }
   </script>
+   <script src="raycaster.js"></script>
+   <script>
+     
+     if (window.disp_h == false){
+       
+       document.getElementById("missionLabel").textContent = "hello";
+     }
+   
+   </script>
 </body>
