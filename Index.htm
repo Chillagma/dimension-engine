@@ -2,14 +2,22 @@
 JavaScript Canvas Wolfenstein 3D Raycaster
 Author: Andrew Lim
 https://github.com/andrew-lim/html5-raycast
+
+<<<<<<< HEAD
+re-adjusted and changed
+lets see
+=======
+re-adjusted
+>>>>>>> 651087c (try to see)
 -->
 <html>
 <head>
 <title>JavaScript Raycasting Engine</title>
-<script src="raycaster.js"></script>
+<script type="module" src="raycaster.js"></script>
+<script type="module" src="java_functions.js"></script>
 <style>
 body {
-  background-color: rgb(25,65,65);
+  background-color: rgb(168, 232, 243);
   height: 100%; overflow: hidden;
   color: white;
 }
@@ -41,14 +49,14 @@ canvas#minimapobjects {
 #screen {
  margin-left: auto;
  margin-right:auto;
- /*width: 480px;
- height: 320px;*/
+ width: 480px;
+ height: 320px;
 
 
- border-top : 4px solid rgb(25,25,25);
- border-left: 4px solid rgb(25,25,25);
- border-right: 4px solid #1B625E;
- border-bottom: 4px solid #1B625E;
+ border-top : 4px solid rgb(215, 245, 202);
+ border-left: 4px solid rgb(182, 238, 240);
+ border-right: 4px solid #c0fffc;
+ border-bottom: 4px solid #caf8f6;
  overflow : hidden;
 }
 
@@ -65,29 +73,27 @@ canvas#minimapobjects {
   <div style="display: flex; flex-direction: row; justify-content: center; align-content: center;">
     <table cellspacing="10">
       <tr>
-        <td>Ceiling Height</td>
+        <td style="color: rgb(0, 0, 0);">clicking there does nothing</td>
         <td>
           <select name="ceilingHeight" id="ceilingHeight" onchange="javascript:this.blur()">
-            <option>1</option>
-            <option  >2</option>
-            <option>3</option>
-            <option selected>4</option>
+            <option>clicking here</option>
+            <option  >does</option>
+            <option>nothing</option>
+            <option>seriously</option>
+            
           </select>
         </td>
       </tr>
       <tr>
-        <td><label for="texturedCeilingOn">Textured Ceiling</label></td>
-        <td><input type="checkbox" id="texturedCeilingOn" checked="" /></td>
+        
       </tr>
       <tr>
-        <td><label for="texturedFloorOn">Textured Floor</label></td>
-        <td><input type="checkbox" id="texturedFloorOn" checked="" /></td>
-        
+       
       </tr>
       <tr>
 
        
-        <td><label style="color: rgb(238, 243, 245);">USE WASD TO MOVE AND SPACE BAR TO SHOOT AND Q TO RESET</label></td>
+        <td><label style="color: rgb(0, 0, 0);">PRESS WASD TO MOVE AND SPACE BAR TO SHOOT/CHANGE YOUR CO-ORDINATES. AND Q TO RESET.HOLDING DOWN SPACE INSTEAD OF PRESSING IS CHEATING AND WILL LAG GAME AS PUNISHMENT</label></td>
       </tr>
       <tr>
 
@@ -102,14 +108,38 @@ canvas#minimapobjects {
     </div>
   </div>
  
-  <script type="text/javascript">
+  <script type="module" >
+    
+   
+   
+    
+    let raycaster = new Raycaster(document.getElementById("mainCanvas"))
     window.onload = function() {
-      let raycaster = new Raycaster(document.getElementById("mainCanvas"))
-      raycaster.gameCycle()
+      
+      
+      raycaster.gameCycle();
+      
+     
+      
       
     }
+    
+
+    
+   
   </script>
    <script src="raycaster.js"></script>
+   <script type="module" src="java_functions.js">
+    
+   </script>
+
+
+   <script type="text/javascript">
+
+window.onload = function() {
+     
+    }
+   </script>
    <script>
      
      if (window.disp_h == false){
